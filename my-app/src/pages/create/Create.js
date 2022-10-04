@@ -1,6 +1,8 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect} from 'react'
 import './Create.css'
 import { useFetch } from '../../hooks/useFetch'
+import { useNavigate } from 'react-router-dom'
+
 
 export default function Create() {
   const [title, setTitle] = useState('')
@@ -9,7 +11,10 @@ export default function Create() {
   const [newIngredient, setNewIngredient] = useState('')
   const [ingredient, setIngredient] = useState([])
   const ingredientInput = useRef(null)
+  const history = useNavigate()
 
+
+ 
 const { postData, data, error } = useFetch('http://localhost:7000/recipes', 'POST')
 
   const handleSubmit = (e) =>{
@@ -30,7 +35,11 @@ const { postData, data, error } = useFetch('http://localhost:7000/recipes', 'POS
  ingredientInput.current.focus()
   }
 
-
+useEffect(()=> {
+  if(data){
+    history('/')
+  }
+}, [data])
 
   return (
     <div className='create'>
@@ -69,7 +78,7 @@ const { postData, data, error } = useFetch('http://localhost:7000/recipes', 'POS
       <button onClick={handleAdd} className='btn'>Add</button>
       </div>
       </label>
-      
+
       <p>current ingredients: {ingredient.map(prevIngredient => <em key={prevIngredient}>{prevIngredient}, </em>)}</p>
      
 

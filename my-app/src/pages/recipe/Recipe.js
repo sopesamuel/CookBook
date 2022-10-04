@@ -16,7 +16,7 @@ export default function Recipe() {
         <h2 className='page-title'>{recipe.title}</h2>
         <p>Takes {recipe.cookingTime} to prepare.</p>
         <ul>
-        {/* {recipe.ingredients.map(ing => <li key={ing}>{ing}</li>)} */}
+        {recipe.ingredients.map(ing => <li key={ing}>{ing}</li>)}
      
         </ul>
         
